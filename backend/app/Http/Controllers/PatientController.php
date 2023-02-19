@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PatientRequest;
 use App\Models\Patient;
+use App\Services\AddressService;
 use App\Services\PatientService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
@@ -53,10 +54,9 @@ class PatientController extends Controller
         }
     }
 
-    public function update(PatientRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
-            $validation = $request->validated();
             $patient = $this->patientService->update($id, $request->all());
             if (is_null($patient)) {
                 return $this->responseError(null, 'Patient Not Found', Response::HTTP_NOT_FOUND);

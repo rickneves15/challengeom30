@@ -19,4 +19,13 @@ class Patient extends Model
         'cpf',
         'cns'
     ];
+
+    protected $casts = [
+        'birthday'  => 'date:d/m/Y',
+    ];
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }

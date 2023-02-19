@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\AddressController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,12 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::get('patient', [PatientController::class, 'index']);
 Route::get('patient/{id}', [PatientController::class, 'show']);
 Route::post('patient', [PatientController::class, 'store']);
 Route::put('patient/{id}', [PatientController::class, 'update']);
 Route::delete('patient/{id}', [PatientController::class, 'destroy']);
+
+Route::get('get-address/{cep}', [AddressController::class, 'getAddress']);

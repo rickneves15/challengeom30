@@ -3,11 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Address;
-use App\Models\Patient;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PatientSeeder extends Seeder
+class AddressSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,10 +15,7 @@ class PatientSeeder extends Seeder
      */
     public function run()
     {
-        Patient::factory()->count(30)->create()->each(function ($patient) {
-            Address::factory()->create([
-                'patient_id' => $patient->id
-            ]);
-        });
+
+        Address::factory()->count(10)->create();
     }
 }

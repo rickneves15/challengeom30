@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Fake\AddressProvider;
 use App\Fake\CNSProvider;
 use Faker\{Factory, Generator};
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +18,9 @@ class FakeServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Generator::class, function () {
             $fake = Factory::create();
+
             $fake->addProvider(new CNSProvider($fake));
+
             return $fake;
         });
     }
