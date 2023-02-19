@@ -1,6 +1,6 @@
 ## Challenge OM30
 
-O projeto dividido em duas partes beckend e frontend. Backnend usando laravel como framework, usando migration(postgres), factory, faker, seeder, cache(redis) e queue, dividido em três partes desenvolvendo as features `Pacientes`, `Enredeço` e `Importação dos pacientes por csv`. Frontend usando Vue como framework.
+O projeto dividido em duas partes beckend e frontend. Backnend usando laravel como framework, usando migration(postgres), factory, faker, seeder, cache(redis) e queue, dividido em três partes desenvolvendo as features `Pacientes`, `Endereço` e `Importação dos pacientes por csv`. Frontend usando Vue como framework.
 
 ## Requisitos
 
