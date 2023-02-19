@@ -32,6 +32,12 @@ class PatientRequest extends FormRequest
             'birthday' => ['required', 'date', 'date_format:Y-m-d'],
             'cpf' => ['required', 'cpf'],
             'cns' => ['required', 'cns'],
+            'address.cep' => ['required', 'string'],
+            'address.address' => ['required', 'string'],
+            'address.number' => ['required', 'integer'],
+            'address.neighborhood' => ['required', 'string'],
+            'address.city' => ['required', 'string'],
+            'address.state' => ['required', 'string'],
         ];
     }
 

@@ -22,5 +22,6 @@ Route::get('patient/{id}', [PatientController::class, 'show']);
 Route::post('patient', [PatientController::class, 'store']);
 Route::put('patient/{id}', [PatientController::class, 'update']);
 Route::delete('patient/{id}', [PatientController::class, 'destroy']);
+Route::post('patient/import', [PatientController::class, 'import']);
 
 Route::get('get-address/{cep}', [AddressController::class, 'getAddress']);

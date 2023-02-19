@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PatientRequest;
-use App\Models\Patient;
-use App\Services\AddressService;
+use App\Jobs\PatientImportJob;
+use App\Serialize\PatientImportSerialize;
 use App\Services\PatientService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class PatientController extends Controller
 {
     use ResponseTrait;
 
-    public function __construct(private PatientService $patientService)
+    public function __construct(private PatientService $patientService, private PatientImportSerialize $patientImportSerialize)
     {
     }
 
@@ -77,6 +77,27 @@ class PatientController extends Controller
             }
 
             return $this->responseSuccess($patient, 'Patient Deleted Successfully !');
+        } catch (\Exception $e) {
+            return $this->responseError(null, $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            if ($request->has('file')) {
+
+                $file    = array_map('str_getcsv', file($request->file));
+
+                foreach ($file as $data) {
+                    $this->patientImportSerialize->setData($data);
+                    $dataSerialized = $this->patientImportSerialize->handle();
+                    PatientImportJob::dispatch($dataSerialized);
+                }
+
+                return null;
+            }
+            // return $this->responseSuccess($patient, 'Patient Imported  Successfully !');
         } catch (\Exception $e) {
             return $this->responseError(null, $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
